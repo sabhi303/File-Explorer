@@ -1,10 +1,12 @@
-let calc = require('./calc.js')
-let fh = require('./fs')
 
-// console.log("Addition Result : ", calc.add(4,5))
-// console.log("Substraction Result : ", calc.sub(4,5))
-// console.log("Multiplication Result : ", calc.mul(4,5))
-// console.log("Division Result : ", calc.div(4,5))
+const espress = require('express')
 
-fh.read
 
+const app = espress()
+
+let route = require('./routers/root')
+app.use('/', route)
+
+app.listen(9000, (req, res ) => {
+    console.log(" Listening on localhost:9000...")  
+})
