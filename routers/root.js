@@ -15,8 +15,8 @@ module.exports = app.get('/', (req, res) => {
 
 
 // other routers //
-let testRouter = require('./test')
-let exploreRouter = require('./explore')
+const testRouter = require('./test')
+const exploreRouter = require('./explore')
 
 // redirect //
 app.use( '/test',       testRouter      )

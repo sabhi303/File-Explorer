@@ -1,7 +1,7 @@
 /* main */
 const espress = require('express')
 
-let app = espress()
+const app = espress()
 
 module.exports = app.get('/', (req, res) => {
     
