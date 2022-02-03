@@ -3,15 +3,16 @@ const espress = require('express')
 
 const app = espress()
 
-module.exports = app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     
     try{
-        
-        res.send("Hello, there.. [ From Explore ]")
-
+        explorer = require("./../modules/explore")
+        explorer.getListFiles(req,res)
     }catch( err ){
 
         console.error("Module : routes/explore.js: get('/') \n", err)
         
     }
 })
+
+module.exports = app

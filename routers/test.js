@@ -3,7 +3,7 @@ const espress = require('express')
 
 const app = espress()
 
-module.exports = app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     
     try{
         
@@ -15,3 +15,5 @@ module.exports = app.get('/', (req, res) => {
         
     }
 })
+
+module.exports = app

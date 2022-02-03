@@ -3,7 +3,7 @@ const espress = require('express')
 
 const app = espress()
 
-module.exports = app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     try{
         // render index or jst handshake..
         res.send("Hello, there..")
@@ -21,3 +21,6 @@ const exploreRouter = require('./explore')
 // redirect //
 app.use( '/test',       testRouter      )
 app.use( '/explore',    exploreRouter   )
+
+// export routes //
+module.exports = app
