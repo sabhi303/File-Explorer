@@ -1,14 +1,11 @@
 //  global variables are declared here //
 
-global.port     = undefined
-global.basedir  = undefined
-global.host     = "localhost"
-global.baseUrl  = `http://${host}:${port}/explore/`
-global.host     = "localhost"
-
 module.exports.init = function init(){
-    global.port = 9000
-    basedir = "C:\Users\Abhijeet\OneDrive\Desktop\FileExplorer"
+    
+    global.port     = 9000
+    global.basedir  = "C:\\Users\\Abhijeet\\OneDrive\\Documents"
+    global.host     = "localhost"
+    global.baseUrl  = `http://${host}:${port}/explore/`
 }
 
 module.exports.set_basedir = function set_basedir(dir){

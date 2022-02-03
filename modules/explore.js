@@ -1,9 +1,14 @@
 const fs = require("fs");
+const path_resolver = require("path");
 
-const getListFiles = (req, res) => {
-    const directoryPath = basedir
+const Files = (req, res, path) => {
+
+    // join path
+    const resource = decodeURIComponent( path_resolver.join(basedir,path) )
+    console.log(resource)
+    
   
-    fs.readdir(directoryPath, function (err, files) {
+    fs.readdir(resource, function (err, files) {
       if (err) {
         res.status(500).send({
           message: "Unable to scan files!",
@@ -24,5 +29,5 @@ const getListFiles = (req, res) => {
   };
 
   module.exports = {
-      getListFiles
+      Files
   }
