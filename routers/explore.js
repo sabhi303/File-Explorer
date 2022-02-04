@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     try{
         
         explorer = require("./../modules/explore")
-        explorer.Files(req, res,"")
+        explorer.Filter(req, res,"")
 
     }catch( err ){
 
@@ -22,7 +22,7 @@ app.get('/:path', (req, res) => {
     try{
         
         explorer = require("./../modules/explore")
-        explorer.Files(req, res, req.params.path)
+        explorer.Filter(req, res, req.params.path)
 
     }catch( err ){
 
