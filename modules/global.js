@@ -2,7 +2,7 @@
 
 module.exports.init = function init(){
     
-    global.port     = 9000
+    global.port     = 6889
     global.basedir  = "C:\\Users\\Abhijeet\\OneDrive\\Documents"
     global.host     = "localhost"
     global.baseUrl  = `http://${host}:${port}/explore/`
