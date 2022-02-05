@@ -25,6 +25,7 @@ async function change_rootdir()
     try{
         let fs = require('fs')
         let _basedir = await prompt("Enter root directory : ")
+        console.log("____")
         
         _basedir = decodeURIComponent(_basedir)
         if ( fs.existsSync(_basedir) && fs.lstatSync(_basedir).isDirectory() )
@@ -78,7 +79,7 @@ async function change_port()
     try{
         console.log("-------------------------------")
         let _port = await prompt("Enter Port : ")
-        console.log("__")
+        console.log("____")
         try { _port = parseInt(_port) } catch {}
     
         // let result
@@ -145,9 +146,50 @@ async function  EnvironmentSettings()
     } catch ( err ) {
         console.error("Internal Error : ", err)
     }
-    
-
 }
+
+async function ServerSettings()
+{
+    try {
+
+        let choice = 0
+                
+        while(choice != 4 )
+        {
+            console.log("\n===============================\n")
+            console.log(`[ SERVER SETTINGS ]\n
+                        \r\t  1. Check Status
+                        \r\t  2. Start Server
+                        \r\t  3. Stop Server
+                        \r\t  4. Return to Main Menu
+                        `)
+            choice = await prompt("\rChoice\t: ")
+            console.log("____")
+
+            
+            try { choice = parseInt(choice) } catch {}
+            switch (choice) {
+                case 1:
+                    console.log("Checking Server Status...")
+                    break;
+                case 2:
+                    console.log("Starting Server...")
+                    break;
+                case 3:
+                    console.log("StoppingServer...")
+                    break
+                case 4:
+                    return
+                default:
+                    console.log("Please enter a valid choice!")
+                    break;
+            }
+        }
+    } catch ( err ) {
+        console.error("Internal Error : ", err)
+    }
+}
+
 function printHeader() {
         // header
         console.log("*******************************")
@@ -180,7 +222,7 @@ async function main()
                     await EnvironmentSettings()
                     break;
                 case 2:
-                    await change_rootdir()
+                    await ServerSettings()
                     break;
                 case 3:
                     process.exit()
