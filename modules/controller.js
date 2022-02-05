@@ -7,7 +7,7 @@ const app_env = require('./global')
 app_env.init()
 
 
-// prompt : courtsey : https://stackoverflow.com/a/68504470
+// prompt => courtsey : https://stackoverflow.com/a/68504470
 
 const { exit } = require('process');
 const readline = require('readline');
@@ -127,6 +127,7 @@ async function  EnvironmentSettings()
                         \r\t  3. Return to Main Menu
                         `)
             choice = await prompt("\rChoice\t: ")
+            console.log("____")
             
             try { choice = parseInt(choice) } catch {}
             switch (choice) {
@@ -146,6 +147,10 @@ async function  EnvironmentSettings()
     } catch ( err ) {
         console.error("Internal Error : ", err)
     }
+}
+
+async function getServerStatus(){
+    
 }
 
 async function ServerSettings()
@@ -193,7 +198,7 @@ async function ServerSettings()
 function printHeader() {
         // header
         console.log("*******************************")
-        console.log("* File Explorer API contoller *")
+        console.log("  File Explorer API contoller  ")
         console.log("*******************************")
 }
 
@@ -238,4 +243,4 @@ async function main()
     }
 }
 
-main()
+main()  
