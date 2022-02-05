@@ -149,13 +149,11 @@ async function  EnvironmentSettings()
     }
 }
 
-async function getServerStatus(){
-    
-}
 
 async function ServerSettings()
 {
     try {
+        const server = require('./server')
 
         let choice = 0
                 
@@ -175,14 +173,43 @@ async function ServerSettings()
             try { choice = parseInt(choice) } catch {}
             switch (choice) {
                 case 1:
-                    console.log("Checking Server Status...")
+                    await server.checkServerStatus( function result(err, result){
+                        if( result==true ){
+                            console.log(`\nServer is listening on port:${port}..\n`)
+                        }
+                        else
+                        {
+                            console.log("\nServer is not listening\n")
+                        }
+                    })
                     break;
+
                 case 2:
-                    console.log("Starting Server...")
+                    await server.startServer()
+                    await server.checkServerStatus( function result(err, result){
+                        if( result==true ){
+                            console.log("Server started..")
+                        }
+                        else
+                        {
+                            console.log("Unable to start the server!")
+                        }
+                    })
                     break;
+
                 case 3:
-                    console.log("StoppingServer...")
-                    break
+                    await server.stopServer()
+                    await server.checkServerStatus( function result(err, result){
+                        if( result==true ){
+                            console.log("Server is still running..")
+                            console.log("Unable to start the server")
+                        }
+                        else
+                        {
+                            console.log("Server stopped..")
+                        }
+                    })
+                    break;
                 case 4:
                     return
                 default:

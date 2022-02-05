@@ -13,7 +13,7 @@ app.use( cors( {origin: `http://${host}:${port}`} ))
 app.use(espress.urlencoded({ extended: true }));
 
 
-async function checkServerStatus(result) {
+module.exports.checkServerStatus = async function checkServerStatus(result) {
 
     try {    
         if( server != undefined )
@@ -30,7 +30,7 @@ async function checkServerStatus(result) {
 
     
 }
-async function stopServer() {
+module.exports.stopServer = async function stopServer() {
     try {
         
         if( server != undefined)
@@ -44,7 +44,7 @@ async function stopServer() {
     }
 }
 
-async function startServer() {
+module.exports.startServer = async function startServer() {
     try {
         
         if(server == undefined)
@@ -53,7 +53,7 @@ async function startServer() {
             app.use('/', route)
         
             server = app.listen(port, () => {
-            console.log(`Listening on ${port}... `)
+                return
             })
         }
 
@@ -62,6 +62,7 @@ async function startServer() {
     }
 }
 
+/*
 startServer()
 checkServerStatus( function result(err, result){
     if( result==true ){
@@ -82,3 +83,4 @@ checkServerStatus( function result(err, result){
         console.log("Server is stopped..")
     }
 })
+*/

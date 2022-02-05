@@ -50,7 +50,7 @@ itsDirectory = (resource, res) => {
 }
 
 itsFile = (resource, res) => {
-  console.log("File : ",resource)
+  // console.log("File : ",resource)
 
   res.download(resource, path_mod.parse(resource).base, (err) => {
     if (err) {
@@ -65,7 +65,7 @@ itsFile = (resource, res) => {
 const Filter = (req, res, path) => {
   // join path
   const resource = decodeURIComponent(path_mod.join(basedir, path))
-  console.log(resource)   /* DEBUG*/
+  // console.log(resource)   /* DEBUG*/
 
   try {
     if (fs.existsSync(resource)) {
