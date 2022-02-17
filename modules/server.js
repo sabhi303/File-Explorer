@@ -4,12 +4,12 @@ var cors = require('cors')
 var server = undefined
 
 // create environment
-const app_env = require('./global')
-app_env.init()
+// const app_env = require('./global')
+// app_env.init()
 
 // setting up
 const app = espress()
-app.use( cors( {origin: `http://${host}:${port}`} ))
+// app.use( cors( {origin: `http://${host}:${port}`} ))
 app.use(espress.urlencoded({ extended: true }));
 
 

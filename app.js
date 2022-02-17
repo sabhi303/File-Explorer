@@ -8,7 +8,8 @@ const app_env = require('./modules/global')
 app_env.init()
 
 const app = espress()
-app.use( cors( {origin: `http://${host}:${port}`} ))
+// to support from any platform..
+app.use( cors() )
 app.use(espress.urlencoded({ extended: true }));
 
 const route = require('./routers/root')

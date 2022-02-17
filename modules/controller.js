@@ -3,9 +3,15 @@
 
 
 // create environment .. temporary, delete later..
-const app_env = require('./global')
-app_env.init()
 
+{
+    const app_env = require('./global')
+    app_env.init()
+    // only if not already initialized
+}
+
+// server settings..
+const server = require('./server')
 
 // prompt => courtsey : https://stackoverflow.com/a/68504470
 
@@ -25,25 +31,26 @@ async function change_rootdir()
     try{
         let fs = require('fs')
         let _basedir = await prompt("Enter root directory : ")
-        console.log("____")
+        console.log("_")
         
         _basedir = decodeURIComponent(_basedir)
         if ( fs.existsSync(_basedir) && fs.lstatSync(_basedir).isDirectory() )
         {
             basedir = _basedir
+            console.log("Setting root = ", basedir)
         }
         else
         {
             console.log(`Entered directory doesn't exist..
                         \rPlease enter valid one..\n`)
-            basedir = decodeURIComponent(__dirname)
-            console.log("Setting root = ", basedir)
+            
         }
     }catch( err ){
         console.error("Internal Error : ", err)   
     }
 }
 
+// this needs to be changed, not working..
 async function checkIfPortisInUse( _port, result ) {
     // courtsey : https://stackoverflow.com/a/19129614 //which fails///
     
@@ -81,19 +88,30 @@ async function change_port()
         let _port = await prompt("Enter Port : ")
         console.log("____")
         try { _port = parseInt(_port) } catch {}
-    
+        
+        let res
+        await server.checkServerStatus( function result(err, result){
+                res = result
+        })
         // let result
         return new Promise ((resolve, reject) =>{
             checkIfPortisInUse( _port, function( err, result )
             {
                 if ( ! result )
                 {
-                    port = _port
-                    // ithe server ch listerning parat start kra..
-                    console.log("Setting port = ", port)
-                    console.log("URL          = ", `${host}:${port}`)
-                    if (err) reject(err)
-                    else resolve(result)
+                        if( res==true ){
+                            console.log("Server is already running...")
+                            console.log("Please stop it and try again...")
+                            return
+                        }
+                        else
+                        {
+                            port = _port
+                            console.log("Setting port = ", port)
+                            console.log("URL          = ", `${host}:${port}`)
+                            if (err) reject(err)
+                            else resolve(result)
+                        }
                 }
                 else
                 {
@@ -153,7 +171,6 @@ async function  EnvironmentSettings()
 async function ServerSettings()
 {
     try {
-        const server = require('./server')
 
         let choice = 0
                 
@@ -241,6 +258,7 @@ async function main()
         
         while(choice != 3 )
         {
+            console.log("\n===============================\n")
             console.log(`[ MAIN MENU ]\n
                         \r\t  1. Environment Settings
                         \r\t  2. API Settings
@@ -257,6 +275,7 @@ async function main()
                     await ServerSettings()
                     break;
                 case 3:
+                    console.log("\n===========Thanks==============\n")
                     process.exit()
                 default:
                     console.log("Please enter a valid choice!")

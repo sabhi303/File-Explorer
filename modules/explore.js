@@ -43,7 +43,7 @@ itsDirectory = (resource, res) => {
                 )).size)
       });
     });
-
+    console.log(fileInfos)
     res.status(200).send(fileInfos);
   });
 
